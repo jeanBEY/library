@@ -2,6 +2,11 @@ const booksContainer = document.querySelector('#books-container');
 
 const myLibrary = [];
 
+const addButton = document.getElementById("addButton");
+const bookDialog = document.getElementById("bookDialog");
+const selectBoolean = bookDialog.querySelector("select");
+const confirmBtn = bookDialog.querySelector("#confirmBtn");
+
 function Book(title, author, pages, read_status) {
   // the constructor...
   this.title = title;
@@ -29,6 +34,7 @@ function renderBooks(myLibrary) {
         pages.innerText = `Pages: ${book.pages}`;
         read_status.innerText = `Read ?: ${book.read_status}`;
 
+        //may need to add more classes
         div.classList = 'card'
 
         div.appendChild(title);
@@ -39,6 +45,25 @@ function renderBooks(myLibrary) {
         booksContainer.appendChild(div);
     });
 }
+
+addButton.addEventListener("click", () => {
+    bookDialog.showModal();
+});
+
+
+// "Cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event.
+bookDialog.addEventListener("close", (e) => {
+    booksContainer.value = 
+        bookDialog.returnVallue === "default" 
+        ? "No return value."
+        : `ReturnValue: ${bookDialog.returnValue}.`; // Have to check for "default" rather than empty string
+});
+
+// Prevent the "confirm" button from the default behavior of submitting the form, and close the dialog with the `close()` method, which triggers the "close" event.
+confirmBtn.addEventListener("click", (event) => {
+    event.preventDefault(); // We don't want to submit this fake form
+    bookDialog.close(selectBoolean.value); // Have to send the select box value here.
+  });
 
 /* FOR TESTING ONLY - DELETE BELOW */
 

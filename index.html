@@ -8,10 +8,37 @@
     </head>
     <body>
         
-        <button type="submit" class="button">ADD</button>
+        <button id="addButton">ADD</button>
+
+        <!-- A modal dialog containing a form -->
+        <dialog id="bookDialog">
+            <form>
+                <h2>Book Information</h2>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+        
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" required>
+
+                <label for="pages">Pages:</label>
+                <input type="number" id="pages" name="pages" min="1" max="1000" required>
+
+                <label for="readstatus">Read?:</label>
+                <select id="readstatus" name="readstatus" required>
+                    <option value="default">Select Yes or No</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <div>
+                    <button value="cancel" formmethod="dialog">Cancel</button>
+                    <button id="confirmBtn" value="default">Confirm</button>
+                </div>
+
+            </form>
+        </dialog>
 
         <div id="books-container">
-            
         </div>
 
         <script src="library.js"></script>
