@@ -1,26 +1,41 @@
-const booksContainer = document.querySelector('#books-container');
+
+const modal_container = document.querySelector('#modal_container');
+const modal = document.querySelector('#modal')
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const read_status = document.querySelector('#read_status');
+
+const open_modal = document.querySelector("#open_modal");
+const close_modal = document.querySelector("#close_modal");
+
+const booksContainer = document.querySelector('#books_container');
 
 const myLibrary = [];
 
-const addButton = document.getElementById("addButton");
-const bookDialog = document.getElementById("bookDialog");
-const selectBoolean = bookDialog.querySelector("select");
-const confirmBtn = bookDialog.querySelector("#confirmBtn");
-
+//Constructor
 function Book(title, author, pages, read_status) {
-  // the constructor...
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read_status = read_status;
 }
 
+//Add book to library - MAY DELETE THIS
 function addBookToLibrary(Book) {
-  // do stuff here
     myLibrary.push(Book);
 }
 
-function renderBooks(myLibrary) {
+// Clears the form input
+function clearForm() {
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read_status.checked = false;
+}
+
+//Show library
+function printBooks() {
     myLibrary.forEach(book => {
 
         const div = document.createElement('div');
@@ -46,26 +61,41 @@ function renderBooks(myLibrary) {
     });
 }
 
-addButton.addEventListener("click", () => {
-    bookDialog.showModal();
+//Click Events
+open_modal.addEventListener('click', () =>{
+    modal_container.classList.add('show');
+});
+
+close_modal.addEventListener('click', () =>{
+    modal_container.classList.remove('show');
+});
+
+modal.addEventListener('submit', (e)=> {
+    modal_container.classList.remove('show');
+    e.preventDefault();
+    const book = new Book(title.value, author.value, pages.value, read_status.checked);
+    myLibrary.push(book);
+    clearForm();
+    printBooks();
 });
 
 
-// "Cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event.
-bookDialog.addEventListener("close", (e) => {
-    booksContainer.value = 
-        bookDialog.returnVallue === "default" 
-        ? "No return value."
-        : `ReturnValue: ${bookDialog.returnValue}.`; // Have to check for "default" rather than empty string
-});
+//NEED TO FIGURE OUT WHY THE SUBMIT BUTTON IS NOT ADDING BOOK TO ARRAY
 
-// Prevent the "confirm" button from the default behavior of submitting the form, and close the dialog with the `close()` method, which triggers the "close" event.
-confirmBtn.addEventListener("click", (event) => {
-    event.preventDefault(); // We don't want to submit this fake form
-    bookDialog.close(selectBoolean.value); // Have to send the select box value here.
-  });
+let myBook1 = new Book('hello', 'world', 15, true);
+addBookToLibrary(myBook1);
+
+let myBook2 = new Book('good', 'afternoon', 15, true);
+addBookToLibrary(myBook2);
+
+let myBook3 = new Book('good', 'evening', 15, true);
+addBookToLibrary(myBook3);
+
+printBooks();
+
 
 /* FOR TESTING ONLY - DELETE BELOW */
+/***
 
 let myBook1 = new Book('hello', 'world', 15, true);
 addBookToLibrary(myBook1);
@@ -82,4 +112,5 @@ myLibrary.forEach(book => {
 
 renderBooks(myLibrary);
 
+***/
 /* FOR TESTING ONLY - DELETE ABOVE */
