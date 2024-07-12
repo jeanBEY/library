@@ -36,6 +36,7 @@ function clearForm() {
 
 //Show library
 function printBooks() {
+    booksContainer.textContent = '';
     myLibrary.forEach(book => {
 
         const div = document.createElement('div');
