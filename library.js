@@ -72,11 +72,11 @@ function createBooks(book) {
     book_div.appendChild(read_button);
     if(book.read_status===false){
         read_button.textContent = 'Not Read';
-        read_button.style.backgroundColor = '#e68510';
+        read_button.style.backgroundColor = '#a75265';
     }
     else {
         read_button.textContent = 'Read';
-        read_button.style.backgroundColor = '#48e064';
+        read_button.style.backgroundColor = '#ec7263';
     }
     book_div.appendChild(remove_button);
 
