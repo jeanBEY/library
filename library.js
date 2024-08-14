@@ -114,13 +114,13 @@ modal.addEventListener('submit', (e)=> {
 
 //NEED TO FIGURE OUT WHY THE SUBMIT BUTTON IS NOT ADDING BOOK TO ARRAY
 
-let myBook1 = new Book('hello', 'world', 15, false);
+let myBook1 = new Book('Harry Potter', 'J.K. Rowling', 15, false);
 addBookToLibrary(myBook1);
 
-let myBook2 = new Book('good', 'afternoon', 15, false);
+let myBook2 = new Book('The Lord of the Rings', 'J.R.R. Tolkien', 15, false);
 addBookToLibrary(myBook2);
 
-let myBook3 = new Book('good', 'evening', 15, true);
+let myBook3 = new Book('The Great Gatsby', 'F. Scott Fitzgerald', 15, true);
 addBookToLibrary(myBook3);
 
 renderLibrary();
